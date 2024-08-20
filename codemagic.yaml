@@ -1,7 +1,7 @@
 workflows:
   ios-build:
     name: iOS Build Workflow
-    instance_type: macOS M1 VM
+    instance_type: mac_mini_m1
     environment:
       flutter: stable
     scripts:
