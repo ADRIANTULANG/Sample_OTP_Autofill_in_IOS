@@ -1,0 +1,20 @@
+workflows:
+  ios-build:
+    name: iOS Build Workflow
+    instance_type: mac_mini
+    environment:
+      flutter: stable
+    scripts:
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build iOS
+        script: flutter build ios --release --no-codesign
+      - name: Generate IPA
+        script: |
+          mkdir -p build/ios/ipa
+          xcodebuild -exportArchive \
+          -archivePath build/ios/archive/Runner.xcarchive \
+          -exportOptionsPlist ios/ExportOptions.plist \
+          -exportPath build/ios/ipa
+    artifacts:
+      - build/ios/ipa/*.ipa
